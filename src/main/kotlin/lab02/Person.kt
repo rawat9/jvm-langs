@@ -5,16 +5,21 @@ data class Person(
     val age: Int,
     val height: Double = 0.0,
     val weight: Int = 0,
-    val email: String?
+    val email: String? = null
 ) {
-    private var userName: String;
+    private var userName: String
     private var password = ""
 
     init {
-        userName = this.name + (1..100).random();
+        userName = this.name + (1..100).random()
+        password = (1..10).shuffled().take(5).toString()
     }
 
-    constructor(length: Int = 5) {
-        password = (1..10).shuffled().take(length).toString()
+    init {
+        println("Init block 2")
+    }
+
+    init {
+        println("Init block 3")
     }
 }

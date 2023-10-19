@@ -7,11 +7,14 @@ public class PersonForm {
     public static void createFrame() {
         JFrame frame = new JFrame("PersonForm");
         JPanel panel = new JPanel();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        JList<String> list = new JList<>(model);
+
         PersonHandler personHandler = new PersonHandler();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.setSize(270, 500);
+        frame.setSize(470, 500);
         frame.add(panel);
 
         panel.setLayout(null);
@@ -22,12 +25,12 @@ public class PersonForm {
         panel.add(nameLabel);
 
         JTextField nameField = new JTextField();
-        nameField.setBounds(50, 45, 160, 30); // +15
+        nameField.setBounds(50, 45, 160, 30);
         panel.add(nameField);
 
         // Age
         JLabel ageLabel = new JLabel("Age");
-        ageLabel.setBounds(50, 95, 40, 25); // 45+30+20 = 95
+        ageLabel.setBounds(50, 95, 40, 25);
         panel.add(ageLabel);
 
         JTextField ageField = new JTextField();
@@ -71,6 +74,14 @@ public class PersonForm {
         emailField.setBounds(50, 345, 160, 30);
         panel.add(emailField);
 
+        // Persons List
+        JLabel personsListLabel = new JLabel("Persons List");
+        personsListLabel.setBounds(250, 20, 140, 25);
+        panel.add(personsListLabel);
+
+        list.setBounds(250, 50, 200, 300);
+        panel.add(list);
+
         JButton button = new JButton("Create");
         button.setBounds(50, 400, 160, 40);
         panel.add(button);
@@ -83,6 +94,8 @@ public class PersonForm {
             String email = emailField.getText();
 
             Person person = personHandler.createPerson(name, age, height, weight, email);
+            model.add(0, person.getName());
+            personHandler.addToList(person);
             System.out.println(person);
         });
 

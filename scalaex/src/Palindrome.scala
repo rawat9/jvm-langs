@@ -1,6 +1,16 @@
 import scala.io.Source
 
-def palindrome(str: String): Boolean = str == str.reverse
+def palindrome(str: String): Boolean =
+  var i = 0
+  var j = str.length - 1
+
+  while i < j do
+    if str(i) != str(j) then
+      return false
+    i += 1
+    j -= 1
+
+  true
 
 object Palindrome extends App {
   for word <- Source.stdin.getLines do
